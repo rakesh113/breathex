@@ -16,11 +16,31 @@
 <body>
 
 <h1>4-7-8 Breathing Exercise</h1>
-<button id="startButton">Start Exercise</button>
+<button id="startButton4_7_8">Start Exercise</button>
+<h1>Box Breathing Exercise</h1>
+<button id="startButtonBox">Start Exercise</button>
 <div id="display"></div>
 
 <script>
-document.getElementById("startButton").addEventListener("click", function() {
+document.getElementById("startButtonBox").addEventListener("click", function() {
+    let display = document.getElementById("display");
+    let phases = ['Inhale', 'Hold', 'Exhale', 'Hold'];
+    let currentPhase = 0;
+    let reps = 0;
+    const cycle = () => {
+        display.innerHTML = `${phases[currentPhase]} for 4 seconds.  rep:${reps}`;
+        setTimeout(() => {
+            currentPhase++;
+            if(currentPhase >=phases.length){
+                reps++;
+                currentPhase=0;
+            }
+            cycle();
+        }, 4);
+    };
+    cycle(); // Start the cycle
+}
+document.getElementById("startButton4_7_8").addEventListener("click", function() {
     let phase = ['Inhale', 'Hold', 'Exhale'];
     let times = [4000, 7000, 8000]; // times in milliseconds
     let display = document.getElementById("display");
