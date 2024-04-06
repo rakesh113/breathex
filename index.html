@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>4-7-8 Breathing Exercise</title>
+    <style>
+        body {
+            text-align: center;
+            padding-top: 20px;
+        }
+        #display {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>4-7-8 Breathing Exercise</h1>
+<button id="startButton">Start Exercise</button>
+<div id="display"></div>
+
+<script>
+document.getElementById("startButton").addEventListener("click", function() {
+    let phase = ['Inhale', 'Hold', 'Exhale'];
+    let times = [4000, 7000, 8000]; // times in milliseconds
+    let display = document.getElementById("display");
+    let currentPhase = 0;
+    let reps = 0;
+    const cycle = () => {
+        if (currentPhase >= phase.length && reps==10) {
+            display.innerHTML = "Complete. Feel free to start again.";
+            return;
+        }
+        display.innerHTML = `${phase[currentPhase]} for ${times[currentPhase]/1000} seconds.  rep:${reps}`;
+        setTimeout(() => {
+            currentPhase++;
+            if(currentPhase >=3){
+              reps++;
+              currentPhase=0;
+            }
+            cycle();
+        }, times[currentPhase]);
+    };
+    resp = 0;
+    currentPhase = 0; // Reset to start
+    cycle(); // Start the cycle
+});
+</script>
+
+</body>
+</html>
