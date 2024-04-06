@@ -28,6 +28,10 @@ document.getElementById("startButtonBox").addEventListener("click", function() {
     let currentPhase = 0;
     let reps = 0;
     const cycle = () => {
+      if (reps>=10) {
+            display.innerHTML = "Complete. Feel free to start again.";
+            return;
+        }
         display.innerHTML = `${phases[currentPhase]} for 4 seconds.  rep:${reps}`;
         setTimeout(() => {
             currentPhase++;
@@ -36,10 +40,11 @@ document.getElementById("startButtonBox").addEventListener("click", function() {
                 currentPhase=0;
             }
             cycle();
-        }, 4);
+        }, 4000);
     };
+    currentPhase = 0;
     cycle(); // Start the cycle
-}
+});
 document.getElementById("startButton4_7_8").addEventListener("click", function() {
     let phase = ['Inhale', 'Hold', 'Exhale'];
     let times = [4000, 7000, 8000]; // times in milliseconds
@@ -47,21 +52,21 @@ document.getElementById("startButton4_7_8").addEventListener("click", function()
     let currentPhase = 0;
     let reps = 0;
     const cycle = () => {
-        if (currentPhase >= phase.length && reps==10) {
+        if (reps>=1) {
             display.innerHTML = "Complete. Feel free to start again.";
             return;
         }
         display.innerHTML = `${phase[currentPhase]} for ${times[currentPhase]/1000} seconds.  rep:${reps}`;
         setTimeout(() => {
             currentPhase++;
-            if(currentPhase >=3){
+            if(currentPhase >=10){
               reps++;
               currentPhase=0;
             }
             cycle();
         }, times[currentPhase]);
     };
-    resp = 0;
+    reps = 0;
     currentPhase = 0; // Reset to start
     cycle(); // Start the cycle
 });
