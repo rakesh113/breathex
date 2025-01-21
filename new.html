@@ -42,8 +42,10 @@
   <button onclick="start373Technique()">Start 3-7-3 Technique</button>
   <button onclick="basicInhaleExhale()">Start Basic Inhale Exhale Technique</button>
   <div class="timer" id="timer">Ready?</div>
-
-  <audio id="beep" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+  <div class="timer">
+    <button onclick="stopAll()">Stop</button>
+  </div>
+  <audio id="beep" src="https://www.myinstants.com/media/sounds/smoke-detector-beep.mp3" preload="auto"></audio>
 
   <script>
     let interval;
@@ -93,6 +95,10 @@
         document.getElementById('timer').textContent = instructions[step];
         playBeep();
       }, times[step] * 1000);
+    }
+    function stopAll() {
+      clearInterval(interval);
+      document.getElementById('timer').textContent = "Ready?";
     }
   </script>
 </body>
