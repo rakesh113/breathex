@@ -39,7 +39,7 @@
   <p>Select a technique and follow the beeps to breathe in, hold, and breathe out.</p>
 
   <button onclick="start4444Technique()">Start 4-4-4-4 Technique</button>
-  <button onclick="start373Technique()">Start 3-7-3 Technique</button>
+  <button onclick="start478Technique()">Start 3-7-3 Technique</button>
   <button onclick="basicInhaleExhale()">Start Basic Inhale Exhale Technique</button>
   <div class="timer" id="timer">Ready?</div>
   <div class="timer">
@@ -48,7 +48,10 @@
   <audio id="beep" src="https://www.myinstants.com/media/sounds/smoke-detector-beep.mp3" preload="auto"></audio>
 
   <script>
-    let interval;
+    let timeout;
+    let instructions = [];
+    let times = [];
+    let step = 0;
 
     function playBeep() {
       const beep = document.getElementById('beep');
@@ -56,48 +59,36 @@
       beep.play();
     }
 
-    function start4444Technique() {
-      clearInterval(interval);
-      const times = [4, 4, 4, 4]; // Inhale, Hold, Exhale, Hold
-      const instructions = ['Inhale', 'Hold', 'Exhale', 'Hold'];
-      let step = 0;
+    function startTimer() {
       document.getElementById('timer').textContent = instructions[step];
       playBeep();
-      interval = setInterval(() => {
-        step = (step + 1) % times.length;
-        document.getElementById('timer').textContent = instructions[step];
-        playBeep();
-      }, times[step] * 1000);
+      timeout = setTimeout(startTimer, times[step] * 1000);
+      step = (step + 1) % times.length;
+    }
+    
+    function start4444Technique() {
+      times = [4, 4, 4, 4]; // Inhale, Hold, Exhale, Hold
+      instructions = ['Inhale', 'Hold', 'Exhale', 'Hold'];
+      step = 0;
+      startTimer();
     }
 
-    function start373Technique() {
-      clearInterval(interval);
-      const times = [4, 7, 8]; // Inhale, Hold, Exhale
-      const instructions = ['Inhale', 'Hold', 'Exhale'];
-      let step = 0;
-      document.getElementById('timer').textContent = instructions[step];
-      playBeep();
-      interval = setInterval(() => {
-        step = (step + 1) % times.length;
-        document.getElementById('timer').textContent = instructions[step];
-        playBeep();
-      }, times[step] * 1000);
+    function start478Technique() {
+      clearTimeout(timeout);
+      times = [4, 7, 8]; // Inhale, Hold, Exhale
+      instructions = ['Inhale', 'Hold', 'Exhale'];
+      step = 0;
+      startTimer();
     }
     function basicInhaleExhale() {
-      clearInterval(interval);
-      const times = [4, 4]; // Inhale, Hold, Exhale
-      const instructions = ['Inhale', 'Exhale'];
-      let step = 0;
-      document.getElementById('timer').textContent = instructions[step];
-      playBeep();
-      interval = setInterval(() => {
-        step = (step + 1) % times.length;
-        document.getElementById('timer').textContent = instructions[step];
-        playBeep();
-      }, times[step] * 1000);
+      clearTimeout(timeout);
+      times = [4, 4]; // Inhale, Hold, Exhale
+      instructions = ['Inhale', 'Exhale'];
+      step = 0;
+      startTimer();
     }
     function stopAll() {
-      clearInterval(interval);
+      clearTimeout(timeout);
       document.getElementById('timer').textContent = "Ready?";
     }
   </script>
