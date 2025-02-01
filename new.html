@@ -39,7 +39,8 @@
   <p>Select a technique and follow the beeps to breathe in, hold, and breathe out.</p>
 
   <button onclick="start4444Technique()">Start 4-4-4-4 Technique</button>
-  <button onclick="start478Technique()">Start 3-7-3 Technique</button>
+  <button onclick="start373Technique()">Start 3-7-3 Technique</button>
+  <button onclick="start478Technique()">Start 4-7-8 Technique</button>
   <button onclick="basicInhaleExhale()">Start Basic Inhale Exhale Technique</button>
   <div class="timer" id="timer">Ready?</div>
   <div class="timer">
@@ -67,6 +68,7 @@
     }
     
     function start4444Technique() {
+      clearTimeout(timeout);
       times = [4, 4, 4, 4]; // Inhale, Hold, Exhale, Hold
       instructions = ['Inhale', 'Hold', 'Exhale', 'Hold'];
       step = 0;
@@ -80,6 +82,15 @@
       step = 0;
       startTimer();
     }
+
+    function start373Technique() {
+      clearTimeout(timeout);
+      times = [3, 7, 3]; // Inhale, Hold, Exhale
+      instructions = ['Inhale', 'Hold', 'Exhale'];
+      step = 0;
+      startTimer();
+    }
+    
     function basicInhaleExhale() {
       clearTimeout(timeout);
       times = [4, 4]; // Inhale, Hold, Exhale
